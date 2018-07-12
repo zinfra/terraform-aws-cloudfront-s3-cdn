@@ -130,10 +130,13 @@ resource "aws_cloudfront_distribution" "default" {
   }
 
   viewer_certificate {
-    acm_certificate_arn            = "${var.acm_certificate_arn}"
+    #acm_certificate_arn            = "${var.acm_certificate_arn}"
+    iam_certificate_id             = "${var.iam_certificate_id}"
     ssl_support_method             = "sni-only"
-    minimum_protocol_version       = "TLSv1"
-    cloudfront_default_certificate = "${var.acm_certificate_arn == "" ? true : false}"
+    minimum_protocol_version       = "TLSv1.1_2016"
+    cloudfront_default_certificate = "${var.iam_certificate_id == "" ? true : false}"
+
+    #cloudfront_default_certificate = "${var.acm_certificate_arn == "" ? true : false}"
   }
 
   default_cache_behavior {

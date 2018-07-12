@@ -36,6 +36,11 @@ variable "enabled" {
   description = "Select Enabled if you want CloudFront to begin processing requests as soon as the distribution is created, or select Disabled if you do not want CloudFront to begin processing requests after the distribution is created."
 }
 
+variable "iam_certificate_id" {
+  description = "Existing IAM Certificate Id"
+  default     = ""
+}
+
 variable "acm_certificate_arn" {
   description = "Existing ACM Certificate ARN"
   default     = ""
