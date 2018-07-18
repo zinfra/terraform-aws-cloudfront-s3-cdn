@@ -68,6 +68,7 @@ resource "aws_s3_bucket" "origin" {
 }
 
 module "logs" {
+  count                    = 0
   source                   = "git::https://github.com/cloudposse/terraform-aws-s3-log-storage.git?ref=tags/0.2.0"
   namespace                = "${var.namespace}"
   stage                    = "${var.stage}"
@@ -112,6 +113,7 @@ resource "aws_cloudfront_distribution" "default" {
   depends_on          = ["aws_s3_bucket.origin"]
 
   logging_config = {
+    enabled         = false
     include_cookies = "${var.log_include_cookies}"
     bucket          = "${module.logs.bucket_domain_name}"
     prefix          = "${var.log_prefix}"
